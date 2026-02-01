@@ -2,7 +2,7 @@
 from fastapi import APIRouter, HTTPException, Path, status
 from typing import List
 from schemas.reservation import TestRes
-from database.database import db_reservations
+from database.database import db
 # --- API Endpoints ---
 router = APIRouter(prefix="/rooms", tags=["rooms"])
 
@@ -21,7 +21,7 @@ def get_room_reservations(
     Lists all reservations for a specific room.
     """
     try:
-        room_res = [r for r in db_reservations if r.room_id == room_id]
+        room_res = db.get_all()
         return room_res
     except Exception as e:
         raise HTTPException(

@@ -1,5 +1,6 @@
 from fastapi import APIRouter, HTTPException, status, Path
 from schemas.reservation import TestRes
+from database.database import db
 from utils import check_overlap
 import uuid
 # --- API Endpoints ---
@@ -23,12 +24,13 @@ def create_reservation(res: TestRes):
             )
         
         res.id = str(uuid.uuid4())
-        db_reservations.append(res)
+        db.add(res)
         return res
         
     except HTTPException:
         raise
     except Exception as e:
+        print(e)
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="An unexpected error occurred while creating the reservation."
@@ -45,15 +47,13 @@ def cancel_reservation(
     """
     Cancels a reservation by ID with validation.
     """
-    global db_reservations
       
-    original_len = len(db_reservations)
+    original_len = len(db)
     
     try:
-        # Perform the deletion logic
-        db_reservations = [r for r in db_reservations if r.id != res_id]
+        success = db.remove(res_id)
         
-        if len(db_reservations) == original_len:
+        if len(db) == original_len:
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND, 
                 detail=f"Reservation with ID {res_id} not found."
