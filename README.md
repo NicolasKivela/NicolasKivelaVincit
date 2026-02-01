@@ -15,4 +15,4 @@ The fastest way to run the application is using Docker Compose:
 1. Ensure Docker is installed and running.
 2. Run the following command in the project root:
    ```bash
-   docker-compose up --build
+   docker compose up --build
