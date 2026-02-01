@@ -10,7 +10,7 @@ RUN pip install --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt
 
 # Kopioidaan vasta tässä vaiheessa koodit, jotta muutos koodissa ei riko asennusvälimuistia
-COPY main.py .
+COPY . .
 
 EXPOSE 8000
 

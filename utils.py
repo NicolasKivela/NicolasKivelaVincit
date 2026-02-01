@@ -1,7 +1,7 @@
-from schemas.reservation import Reservation
+from schemas.reservation import TestRes
 from database.database import db_reservations
 # --- Helper Functions ---
-def check_overlap(new_res: Reservation) -> bool:
+def check_overlap(new_res: TestRes) -> bool:
     """Checks if the new reservation overlaps with existing ones."""
     for res in db_reservations:
         if res.room_id == new_res.room_id:
