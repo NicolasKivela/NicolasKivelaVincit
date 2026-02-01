@@ -47,18 +47,17 @@ def cancel_reservation(
     """
     Cancels a reservation by ID with validation.
     """
-      
-    original_len = len(db)
     
     try:
-        success = db.remove(res_id)
-        
-        if len(db) == original_len:
+        reservation = db.get_reservation_data(res_id)
+        print(reservation)
+        if reservation is None:
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND, 
                 detail=f"Reservation with ID {res_id} not found."
             )
         
+        success = db.remove(res_id)
         return {"message": "Reservation cancelled successfully."}
 
     except HTTPException:

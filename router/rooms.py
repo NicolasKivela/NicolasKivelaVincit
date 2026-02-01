@@ -21,7 +21,7 @@ def get_room_reservations(
     Lists all reservations for a specific room.
     """
     try:
-        room_res = db.get_all()
+        room_res = db.get_all(room_id=room_id)
         return room_res
     except Exception as e:
         raise HTTPException(

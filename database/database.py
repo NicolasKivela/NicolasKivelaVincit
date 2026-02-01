@@ -24,5 +24,11 @@ class ReservationRepository:
     def get_all_raw(self) -> List[TestRes]:
         """Helper to see everything in the 'database'"""
         return self._data
+    def get_reservation_data(self, res_id:str) -> Optional[TestRes]:
+        reservations = self.get_all_raw()
+        for res in reservations:
+            if res.id == res_id:
+                return res
+        return None
 
 db = ReservationRepository()
