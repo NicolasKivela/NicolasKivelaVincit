@@ -410,7 +410,9 @@ Most users won't use your API directly—they’ll use Outlook or Google Calenda
     Single Sign-On (SSO): Use OIDC (OpenID Connect) so that the BookedBy field is automatically populated with the corporate identity, preventing anonymous or unauthorized bookings.
 
 Would you like me to provide a sample JSON structure for a recurring meeting request using the RRULE (iCal) standard?
-########################################## 5. Prompt: create error handling and validation to this function. @router.get("/{room_id}/reservations", response_model=List[TestRes])
+##########################################
+
+5. Prompt: create error handling and validation to this function. @router.get("/{room_id}/reservations", response_model=List[TestRes])
 
 def get_room_reservations(room_id: str):
 
